@@ -38,7 +38,7 @@
         let camera, scene, renderer, sphere, clock;
         let scenesData;
         let currentScene = 0;
-        const originalTextures = {};
+        const textures = {};
 
         init();
 
@@ -91,7 +91,6 @@
             if (renderer.xr.isPresenting === false) {
                 const time = clock.getElapsedTime();
                 sphere.rotation.y += 0.0015;
-                //sphere.position.x = Math.sin(time) * 0.2;
                 sphere.position.y = Math.cos(time) * 0.25;
             }
             renderer.render(scene, camera);
@@ -104,7 +103,6 @@
                     scenesData = data;
                     console.log(scenesData);
                     populateImageList(scenesData.scenes);
-                    // Automatically load the first scene
                     if (scenesData.scenes.length > 0) {
                         changeScene(0);
                     }
@@ -132,54 +130,72 @@
                 texture.generateMipmaps = false;
                 sphere.material.map = texture;
                 sphere.material.needsUpdate = true;
+
+                // Save the original texture
+                textures[currentScene] = {
+                    original: texture,
+                    current: texture,
+                    removeFurniture: null,
+                    redesign: null,
+                };
+
+                loadAdditionalTextures(currentScene);
             });
         }
 
+        function loadAdditionalTextures(sceneIndex) {
+            const sceneData = scenesData.scenes[sceneIndex];
+            const loader = new THREE.TextureLoader();
+
+            if (sceneData.remove_furniture) {
+                loader.load(sceneData.remove_furniture, (texture) => {
+                    texture.colorSpace = THREE.SRGBColorSpace;
+                    texture.minFilter = THREE.NearestFilter;
+                    texture.generateMipmaps = false;
+                    textures[sceneIndex].removeFurniture = texture;
+                });
+            }
+
+            if (sceneData.redesign) {
+                loader.load(sceneData.redesign, (texture) => {
+                    texture.colorSpace = THREE.SRGBColorSpace;
+                    texture.minFilter = THREE.NearestFilter;
+                    texture.generateMipmaps = false;
+                    textures[sceneIndex].redesign = texture;
+                });
+            }
+        }
+
         function handleRemoveFurnitureButtonClick() {
-            const currentSceneData = scenesData.scenes[currentScene];
-            if (currentSceneData.remove_furniture) {
-                toggleTexture(currentSceneData.remove_furniture);
+            const sceneTextures = textures[currentScene];
+            if (sceneTextures && sceneTextures.removeFurniture) {
+                toggleTexture('removeFurniture');
             } else {
-                console.error('No remove_furniture link found for the current scene');
+                console.error('No remove_furniture texture found for the current scene');
             }
         }
 
         function handleRedesignButtonClick() {
-            const currentSceneData = scenesData.scenes[currentScene];
-            if (currentSceneData.redesign) {
-                toggleTexture(currentSceneData.redesign);
+            const sceneTextures = textures[currentScene];
+            if (sceneTextures && sceneTextures.redesign) {
+                toggleTexture('redesign');
             } else {
-                console.error('No redesign link found for the current scene');
+                console.error('No redesign texture found for the current scene');
             }
         }
 
-        function toggleTexture(texturePath) {
-            const currentMaterial = sphere.material;
-            const currentTexture = currentMaterial.map;
+        function toggleTexture(type) {
+            const sceneTextures = textures[currentScene];
+            if (!sceneTextures) return;
 
-            if (!originalTextures[currentScene]) {
-                originalTextures[currentScene] = currentTexture;
-                changeTexture(texturePath);
+            if (sceneTextures.current === sceneTextures.original) {
+                sphere.material.map = sceneTextures[type];
+                sceneTextures.current = sceneTextures[type];
             } else {
-                sphere.material.map = originalTextures[currentScene];
-                sphere.material.needsUpdate = true;
-                delete originalTextures[currentScene];
+                sphere.material.map = sceneTextures.original;
+                sceneTextures.current = sceneTextures.original;
             }
-        }
-
-        function changeTexture(texturePath) {
-            const textureLoader = new THREE.TextureLoader();
-            textureLoader.load(
-                texturePath,
-                (texture) => {
-                    sphere.material.map = texture;
-                    sphere.material.needsUpdate = true;
-                },
-                undefined,
-                (err) => {
-                    console.error(`Error loading texture: ${texturePath}`, err);
-                }
-            );
+            sphere.material.needsUpdate = true;
         }
     </script>
     <script src="index.js"></script>

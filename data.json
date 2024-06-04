@@ -13,10 +13,28 @@
             "remove_furniture":"./images/remove-bedroom.png"
         },
         {
-            "name": "Second Room",
+            "name": "Bedroom 2",
             "image": "./images/second-room.jpg",
             "redesign":"./images/redesign-second-room.png",
             "remove_furniture":"./images/remove-second-room.png"
+        },
+        {
+            "name": " Diner Room",
+            "image": "./images/dinner-room.jpg",
+            "redesign":"./images/redesign-dinner-room.png",
+            "remove_furniture":"./images/remove-dinner-room.png"
+        },
+        {
+            "name": "Sun Room",
+            "image": "./images/sunroom.jpg",
+            "redesign":"./images/redesign-sunroom.png",
+            "remove_furniture":"./images/remove-sunroom.png"
+        },
+        {
+            "name": "Bath Room",
+            "image": "./images/bath_forest.jpg",
+            "redesign":"./images/redesign-bath-forest.png",
+            "remove_furniture":""
         }
     ]
 }
