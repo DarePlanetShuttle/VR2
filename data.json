@@ -2,21 +2,21 @@
     "scenes": [
         {
             "name": "Dinner room",
-            "image": "dinner-room.jpg",
-            "redesign":"redesign-dinner-room.png",
-            "remove_furniture":"remove-dinner-room.png" 
+            "image": "./images/dinner-room.jpg",
+            "redesign":"./images/redesign-dinner-room.png",
+            "remove_furniture":"./images/remove-dinner-room.png" 
         },
         {
             "name": "Bedroom",
-            "image": "bedroom.png",
-            "redesign":"redesign-bedroom.png",
-            "remove_furniture":"remove-bedroom.png"
+            "image": "./images/bedroom.png",
+            "redesign":"./images/redesign-bedroom.png",
+            "remove_furniture":"./images/remove-bedroom.png"
         },
         {
             "name": "Second Room",
-            "image": "second-room.jpg",
-            "redesign":"redesign-second-room.png",
-            "remove_furniture":"remove-second-room.png"
+            "image": "./images/second-room.jpg",
+            "redesign":"./images/redesign-second-room.png",
+            "remove_furniture":"./images/remove-second-room.png"
         }
     ]
 }
