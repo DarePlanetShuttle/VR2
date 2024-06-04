@@ -119,7 +119,7 @@ body {
     border: 2px #2a2f3b solid;
     border-radius: 0.5em;
     margin-bottom: 4px;
-    padding: 0.20em;
+    padding: 0.25em;
     cursor: pointer;
     transition: background 0.3s;
 }
