@@ -104,7 +104,9 @@
                         scenesData = data;
                         console.log(scenesData)
                         populateImageList(scenesData.scenes);
-                    })
+                        if (scenesData.scenes.length > 0) {
+                            changeScene(0);
+            }})
                     .catch(error => console.error('Error loading JSON data:', error));
             }
 
