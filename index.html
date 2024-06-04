@@ -4,7 +4,7 @@
 		<title>three.js vr - panorama with depth</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="styles.css">
 
 	</head>
 	<body>
@@ -29,7 +29,7 @@
 		<script type="importmap">
 			{
 				"imports": {
-					"three": "../build/three.module.js",
+					"three": "./three.module.js",
 					"three/addons/": "./jsm/"
 				}
 			}
@@ -38,7 +38,7 @@
 		<script type="module">
 
 			import * as THREE from 'three';
-            import { VRButton } from '/jsm/webxr/VRButton.js';
+            import { VRButton } from './VRButton.js';
 
             let camera, scene, renderer, sphere, clock;
             let scenesData;
@@ -98,7 +98,7 @@
             }
 
             function loadJSONData() {
-                fetch('./textures/data.json')
+                fetch('data.json')
                     .then(response => response.json())
                     .then(data => {
                         scenesData = data;

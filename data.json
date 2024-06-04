@@ -1,0 +1,22 @@
+{
+    "scenes": [
+        {
+            "name": "Dinner room",
+            "image": "dinner-room.jpg",
+            "redesign":"redesign-dinner-room.png",
+            "remove_furniture":"remove-dinner-room.png" 
+        },
+        {
+            "name": "Bedroom",
+            "image": "bedroom.png",
+            "redesign":"redesign-bedroom.png",
+            "remove_furniture":"remove-bedroom.png"
+        },
+        {
+            "name": "Second Room",
+            "image": "second-room.jpg",
+            "redesign":"redesign-second-room.png",
+            "remove_furniture":"remove-second-room.png"
+        }
+    ]
+}
