@@ -5,7 +5,7 @@ FROM nginx:latest
 WORKDIR /usr/share/nginx/html
 
 # Copiar el contenido de la carpeta html al contenedor
-COPY html/ .
+COPY . .
 
 # Exponer el puerto 80 para el tráfico HTTP
 EXPOSE 80
